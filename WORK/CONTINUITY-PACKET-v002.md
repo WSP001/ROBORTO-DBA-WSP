@@ -16,6 +16,9 @@ SeaTrace is governed by the same continuity doctrine as the seafood evidence.
 Insert **after** the machine-readable compiler and **before** the job
 sequence. Do not add another 001 letter. Do not disturb 001A–001K.
 
+Section **14A** (DevOps Continuity and Evidence ETL) is folded in.
+Teammate restatement, graded: [14A-DEVOPS-ETL.md](./14A-DEVOPS-ETL.md).
+
 ## Machine-readable compiler
 
 ```
@@ -32,8 +35,21 @@ subject_public: UNKNOWN
 subject_private: UNKNOWN
 census_001A: NOMINATED
 jobs_001B_001K: NOT_COMPLETE
+job_001J: NOT_COMPLETE
+section: 14A
 planes: EVIDENCE | SOFTWARE
+planes_borrow: forbidden
 both_green: required
+commit: not-receipt
+build: not-verification
+push: not-promotion
+deploy: not-correct-deployment
+http_200: not-correct-body
+private_truth: not-public-disclosure
+preflight: read-only-no-repo-files
+etl: extract-normalize-load-reconcile-project-verify
+etl_destructive: forbidden
+second_writer: forbidden
 existence_in_git: not-adoption
 existence_in_db: not-adoption
 pattern_library: not-inherited-checkmarks
@@ -53,38 +69,51 @@ Neither existence in a database nor existence in Git equals adoption.
 
 Both planes must be green. One green plane does not adopt the other.
 
+```
+COMMIT != RECEIPT
+BUILD != VERIFICATION
+PUSH != PROMOTION
+DEPLOY != CORRECT DEPLOYMENT
+HTTP_200 != CORRECT BODY
+PRIVATE TRUTH != PUBLIC DISCLOSURE
+```
+
+A software commit may exist while remaining IMPLEMENTED, UNRECEIPTED,
+UNVERIFIED, and UNADOPTED. Existence is not adoption.
+
 ## Two continuity planes
 
 ```mermaid
 flowchart LR
   subgraph evidence [Evidence continuity]
-    E1[source] --> E2[canonical event]
-    E2 --> E3[lineage]
-    E3 --> E4[reconciliation]
-    E4 --> E5[projection]
-    E5 --> E6[evidence receipt]
+    E1[authorized source] --> E2[evidence envelope]
+    E2 --> E3[canonical event]
+    E3 --> E4[lineage]
+    E4 --> E5[reconciliation]
+    E5 --> E6[governed projection]
+    E6 --> E7[evidence receipt]
   end
   subgraph software [Software continuity]
-    S1[source commit] --> S2[authorized change]
-    S2 --> S3[tests]
-    S3 --> S4[build artifact]
-    S4 --> S5[verifier]
-    S5 --> S6[deployment / projection]
+    S1[authorized source revision] --> S2[bounded implementation]
+    S2 --> S3[deterministic tests]
+    S3 --> S4[artifact]
+    S4 --> S5[independent verification]
+    S5 --> S6[authorized promotion]
     S6 --> S7[release receipt]
   end
 ```
 
 | Plane | Flow |
 |---|---|
-| Evidence | source → canonical event → lineage → reconciliation → projection → evidence receipt |
-| Software | source commit → authorized change → tests → build artifact → verifier → deployment/projection → release receipt |
+| Evidence | authorized source → evidence envelope → canonical event → lineage → reconciliation → governed projection → evidence receipt |
+| Software | authorized source revision → bounded implementation → deterministic tests → artifact → independent verification → authorized promotion → release receipt |
 
 ## Public state context vs private event logic
 
 This is the UNKNOWN → KNOWN rule.
 
 | Context | Knowledge now | Law |
-|---|---|
+|---|---|---|
 | **Public state** (campaign copy, Commons record, MSC site) | UNKNOWN | Repository, fully qualified ref, and SHA stay UNKNOWN. Naming a public repo as a *lane* is allowed. Echoing a private SHA is not. UNKNOWN here is correct, not a missing field. |
 | **Private event logic** (harness, graph, review receipts) | UNKNOWN | Starts UNKNOWN. Becomes KNOWN only from fetched bytes that bind repository + fully qualified ref + full SHA. VERIFIED-REPORTED is not KNOWN. Bare `main` is never KNOWN. |
 
@@ -98,10 +127,10 @@ A generator does not emit both rails.
 
 | Rail | Role |
 |---|---|
-| PUBLIC | Allowlist-first disclosure. Stands alone. Never implies a private fact. |
-| COMPLIANCE | Regulator-facing representation. Authorities live here — not a fifth storage rail. |
+| PUBLIC | Allowlist-first disclosure. Stands alone. Never implies a private fact. No ingress or query path to the private canonical ledger. |
+| COMPLIANCE | Regulator-facing representation. Authorities live here — not a fifth storage rail. Not public. |
 | PRIVATE | Event logic, graph, harness, settlement, margin, price. Below the waterline. |
-| SHARED_METADATA | Shared CID / schema / policy labels. Not co-authoritative packets. |
+| SHARED_METADATA | Pairing information, hashes, versions, timestamps, counts, classifications, verdicts, and approved redaction metadata only. |
 
 ## What checks off, and what does not
 
@@ -109,12 +138,14 @@ Predecessor-team work is a **pattern library and evidence lineage**. It is
 not a bucket of green checkmarks that transfers into v002.
 
 | Control | State now | Reason |
-|---|---|
+|---|---|---|
 | One Acting Master / one canonical Packet Handler | DESIGN LAW | Prevents specialty agents becoming competing ledger writers. |
 | Four-pillar evidence ordering | DESIGN LAW | EM observation → ER assertion → receiving measurement → approved MarketSide derivative. |
-| PUBLIC / COMPLIANCE / PRIVATE / SHARED_METADATA | DESIGN LAW | Four rails. Regulators are authorities inside COMPLIANCE. |
-| Pairing handle ≠ crypto key ≠ authority_token | DESIGN LAW | Three unrelated concepts must not collapse into “keys.” |
+| PUBLIC / COMPLIANCE / PRIVATE / SHARED_METADATA | DESIGN LAW | Four rails. PUBLIC has no ingress to the private ledger. Regulators are authorities inside COMPLIANCE. |
+| rail ≠ pairing handle ≠ crypto key ≠ authority_token | DESIGN LAW | Four unrelated concepts must not collapse into “keys.” |
 | Append corrections instead of overwrite | DESIGN LAW | Continuity semantics. Preserve prior receipts. Add a correction edge. |
+| ETL without destructive transformation | DESIGN LAW | Normalize and reconcile create events. They never silently overwrite source evidence. |
+| Neither plane borrows completion | DESIGN LAW | COMMIT ≠ RECEIPT. BUILD ≠ VERIFICATION. PUSH ≠ PROMOTION. HTTP_200 ≠ CORRECT BODY. |
 | Atomic event + lineage + outbox | TARGET CONTRACT | Strong. Not verified on the nominated harness path. |
 | Deterministic content hash vs issued envelope hash | TARGET CONTRACT | Right abstraction. Canonical byte encoding still belongs to 001D. |
 | Mass balance / forecast error / economics formulas | SPECIFIED | Gated by Owner-ratified tolerances and real comparable baselines. |
@@ -127,35 +158,44 @@ not a bucket of green checkmarks that transfers into v002.
 
 ## Evidence ETL + Reconcile + Project + Verify
 
-Keep “ETL” because the engineering lineage already understands it.
-SeaTrace’s version is:
+SeaTrace retains the established ETL concept but applies it without
+destructive transformation. Receipts terminate each plane. They are not
+a seventh ETL rewrite step.
 
 **EXTRACT**
-External evidence enters through a bounded adapter. Nothing is promoted
-merely because it was observed or parsed.
+Adapters may read only authorized sources. Nothing is promoted merely
+because it was observed or parsed.
 
-**TRANSFORM / NORMALIZE**
-Units, identifiers, evidence class, authority, source digest and schema
-are canonicalized. The source observation remains preserved.
+**NORMALIZE**
+Identifiers, units, schemas, authority references, evidence classes, and
+deterministic representations may be standardized. Original source
+identity and digest remain preserved. Never silently overwrite source
+evidence.
 
 **LOAD**
-Only the Packet Handler atomically commits: canonical event + LineageEdge
-+ outbox.
+Only the Packet Handler atomically commits: canonical event + typed
+LineageEdge + outbox. No specialty agent, adapter, generator, projector,
+verifier, UI, or public service becomes a second canonical writer.
 
 **RECONCILE**
-Later measured evidence may confirm, dispute, or supersede earlier
-evidence through new events. Never destructive rewriting.
+Later evidence may CONFIRM, DISPUTE, CORRECT, SUPERSEDE, RECONCILE, or
+BLOCK through new events. Never erase historical evidence.
+Transformation reconciliation uses Owner-ratified unit, loss taxonomy,
+WIP treatment, rounding rule, and tolerance.
 
 **PROJECT**
-Outbox consumers derive separately authorized COMPLIANCE, PRIVATE, and
-PUBLIC representations.
+The outbox is the asynchronous boundary. PUBLIC consumes approved
+projection inputs only and has no ingress to the private canonical
+ledger.
 
 **VERIFY**
-Far-side readback proves the receiving representation actually contains
-the intended identity / version / hash / verdict.
+Far-side readback proves subject identity, hashes, schema, policy,
+verdict, and code SHA / artifact digest when software is produced.
+A local write, commit, push, build, HTTP 200, or deploy command is not
+completion.
 
-**RECEIPT**
-Independent evidence records what actually happened.
+Field-level duties live in [14A-DEVOPS-ETL.md](./14A-DEVOPS-ETL.md).
+Values stay UNKNOWN on this public record.
 
 Receipt canonicalization precedes receipt-producing tests.
 001A–001C are genuinely read-only when authorized.
@@ -173,6 +213,14 @@ for it. That is a deterministic defect class, not an anecdote.
 | `UNVERIFIED_IMPLEMENTATION` | A design or precursor pattern is offered as proof of this path. |
 | `UNAUTHORIZED_PROMOTION` | UNKNOWN is treated as KNOWN, or ADOPTED, without Owner GO. |
 | `DEPLOYMENT_BINDING_UNKNOWN` | A deploy or projection cannot name the artifact / policy / subject it bound. |
+| `RECEIPT_CHAIN_BREAK` | A receipt sequence cannot name prior_receipt_hash or genesis. |
+| `EVENT_WITHOUT_LINEAGE` | A canonical event was accepted without a typed LineageEdge. |
+| `LINEAGE_WITHOUT_EVENT` | A lineage edge exists without the event it claims to bind. |
+| `OUTBOX_WITHOUT_ACCEPTED_EVENT` | An outbox record exists without an accepted canonical event. |
+| `PROJECTION_WITHOUT_SOURCE_RECEIPT` | A projection was emitted without a source receipt. |
+| `PUBLIC_PROJECTION_RECONSTRUCTS_PRIVATE` | Public representation reconstructs a private value. |
+| `SELF_VERIFIED_IMPLEMENTATION` | The builder verifies or authorizes its own work. |
+| `CANONICAL_REQUIRED_ARTIFACT_UNACCOUNTED` | A required artifact has no canonical home and no authorized exclusion. |
 
 ## authority_token
 
@@ -188,7 +236,8 @@ credential unless separately classified and handled as PRIVATE.
 ```
 
 | Name | Is | Is not |
-|---|---|
+|---|---|---|
+| rail | PUBLIC, COMPLIANCE, PRIVATE, or SHARED_METADATA | Not a pairing handle. Not a key. Not an authority. |
 | pairing handle | A correlating name between seats or systems | Not a key. Not an authority. |
 | crypto key | Cryptographic material. PRIVATE unless separately classified | Not a pairing handle. Not an authority_token. |
 | authority_token | Bounded reference for one named action | Not OAuth / JWT / API-secret unless classified PRIVATE. |
@@ -206,34 +255,40 @@ scripts and stable across Git versions and configuration. v2 supplies
 branch / upstream data. NUL-terminated paths avoid pathname parsing
 ambiguity.
 
-Every field starts **UNKNOWN** on this public packet:
+Every field starts **UNKNOWN** on this public packet. REQUIRED is the
+duty when 001A is authorized in private event logic:
 
-- authorized_root
-- repository_root
-- parent_git_boundary
-- repository_identity
-- remote_identity
-- default_branch
-- current_ref
-- full_sha
-- upstream
-- worktrees
-- dirty_paths
-- ignored_required_artifacts
-- untracked_required_artifacts
-- history_relationship_to_expected_base
-- applicable_instruction_files
-- tool_versions
+| Field | Duty | Public knowledge |
+|---|---|---|
+| authorized_root | REQUIRED | UNKNOWN |
+| repository_root | REQUIRED | UNKNOWN |
+| parent_git_boundary | REQUIRED | UNKNOWN |
+| repository_identity | REQUIRED | UNKNOWN |
+| repository_visibility | OBSERVE_IF_AUTHORIZED | UNKNOWN |
+| remote_identity | REQUIRED | UNKNOWN |
+| default_branch | OBSERVE | UNKNOWN |
+| current_ref | REQUIRED | UNKNOWN |
+| full_sha | REQUIRED | UNKNOWN |
+| upstream | OBSERVE | UNKNOWN |
+| worktrees | REQUIRED | UNKNOWN |
+| tracked_change_state | REQUIRED | UNKNOWN |
+| untracked_state | REQUIRED | UNKNOWN |
+| ignored_state | REQUIRED_WHEN_RELEVANT | UNKNOWN |
+| applicable_instruction_files | REQUIRED | UNKNOWN |
+| tool_versions | REQUIRED | UNKNOWN |
+| expected_history_relationship | OBSERVE_WHEN_NOMINATED | UNKNOWN |
+| result | PASS_OR_BLOCK | UNKNOWN |
 
 ## Job sequence (still not run)
 
 | Job | Title | State | Mode |
 |---|---|---|---|
-| 001A | Repository census + Level-0 observations | NOMINATED · NOT RUN · NOT AUTHORIZED | read-only when authorized |
+| 001A | Repository census + Level-0 observations | NOMINATED · NOT RUN · NOT AUTHORIZED | read-only when authorized — no repo files as proof |
 | 001B | Read-only follow-on (named in candidate) | NOT COMPLETE | read-only |
 | 001C | Read-only follow-on (named in candidate) | NOT COMPLETE | read-only |
 | 001D | Canonical byte encoding (content hash vs envelope hash) | NOT COMPLETE | not started |
-| 001E–001K | Remaining sequence | NOT COMPLETE | none inherit success |
+| 001J | Failure recovery | NOT COMPLETE | named coverage — not run, not inherited |
+| 001E–001I · 001K | Remaining sequence | NOT COMPLETE | none inherit success |
 
 This packet ends at HOLD-AUTHORIZATION. 001A is merely nominated.
 
@@ -246,7 +301,13 @@ This packet ends at HOLD-AUTHORIZATION. 001A is merely nominated.
 - SO-07: a specialty agent writes the ledger, or a generator emits both rails.
 - SO-09: Git existence is offered as a receipt, or a receipt has no subject.
 - 001A: a command may be running from the wrong inherited Git root.
+- 001A: a preflight would create repository files as proof that it ran.
 - TOKEN: authority_token is treated as OAuth / JWT / API-secret material.
+- 14A: a plane borrows completion from the other, or HTTP 200 is treated as a correct body.
+- 14A: a required artifact is untracked or local-only with no canonical home.
+- 14A: the builder verifies or authorizes itself.
+- 14A: normalization or reconcile would silently overwrite source evidence.
+- 14A: a specialty agent, UI, or public service becomes a second canonical writer.
 
 ## Terminals this seat will not print
 
