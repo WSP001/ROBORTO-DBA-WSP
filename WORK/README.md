@@ -22,10 +22,9 @@ It is not the live SeaTrace HQ app.
 | [PUBLIC-VS-PRIVATE.md](./PUBLIC-VS-PRIVATE.md) | Record vs store. UNKNOWN → KNOWN. What never crosses the waterline. |
 | [TAMMY001-SO-v002.md](./TAMMY001-SO-v002.md) | Twelve standing orders, readable |
 | [TAMMY001-SO-v002.ts](./TAMMY001-SO-v002.ts) | Same orders as a TypeScript module |
-| [CONTINUITY-PACKET-v002.md](./CONTINUITY-PACKET-v002.md) | Shared Packet Handler packet: two planes, ETL, defects, 001A Level-0 |
-| [CONTINUITY-PACKET-v002.ts](./CONTINUITY-PACKET-v002.ts) | Same packet as a TypeScript module |
-| [14A-DEVOPS-ETL.md](./14A-DEVOPS-ETL.md) | Teammate 14A contract, graded may-or-may-not-apply |
-| [CONTINUITY-14A.ts](./CONTINUITY-14A.ts) | 14A as a TypeScript module |
+| [CONTINUITY-PACKET-v002.md](./CONTINUITY-PACKET-v002.md) | Shared Packet Handler packet: two planes, 14A ETL, defects, 001A Level-0 |
+| [14A-DEVOPS-ETL.md](./14A-DEVOPS-ETL.md) | Teammate 14A contract with field duties, graded may-or-may-not-apply |
+| CONTINUITY-PACKET-v002.ts / CONTINUITY-14A.ts | HQ compiler modules. Markdown is the Commons record this pass. |
 
 ## What does not live here
 
