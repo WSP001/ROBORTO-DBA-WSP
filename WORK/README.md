@@ -24,6 +24,8 @@ It is not the live SeaTrace HQ app.
 | [TAMMY001-SO-v002.ts](./TAMMY001-SO-v002.ts) | Same orders as a TypeScript module |
 | [CONTINUITY-PACKET-v002.md](./CONTINUITY-PACKET-v002.md) | Shared Packet Handler packet: two planes, ETL, defects, 001A Level-0 |
 | [CONTINUITY-PACKET-v002.ts](./CONTINUITY-PACKET-v002.ts) | Same packet as a TypeScript module |
+| [14A-DEVOPS-ETL.md](./14A-DEVOPS-ETL.md) | Teammate 14A contract, graded may-or-may-not-apply |
+| [CONTINUITY-14A.ts](./CONTINUITY-14A.ts) | 14A as a TypeScript module |
 
 ## What does not live here
 

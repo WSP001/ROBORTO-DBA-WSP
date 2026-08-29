@@ -14,17 +14,18 @@ without crossing into private stores.
 
 1. [WORK/README.md](./WORK/README.md) — what is parked
 2. [WORK/CONTINUITY-PACKET-v002.md](./WORK/CONTINUITY-PACKET-v002.md) — shared Packet Handler packet
-3. [WORK/REPO-MAP.md](./WORK/REPO-MAP.md) — business vs social, public vs private
-4. [WORK/FIT-PLAN.md](./WORK/FIT-PLAN.md) — where HQ / TAMMY code fits
-5. [WORK/PUBLIC-VS-PRIVATE.md](./WORK/PUBLIC-VS-PRIVATE.md) — record vs store; UNKNOWN → KNOWN
-6. [WORK/TAMMY001-SO-v002.md](./WORK/TAMMY001-SO-v002.md) — twelve standing orders
+3. [WORK/14A-DEVOPS-ETL.md](./WORK/14A-DEVOPS-ETL.md) — 14A contract, graded may-or-may-not-apply
+4. [WORK/REPO-MAP.md](./WORK/REPO-MAP.md) — business vs social, public vs private
+5. [WORK/FIT-PLAN.md](./WORK/FIT-PLAN.md) — where HQ / TAMMY code fits
+6. [WORK/PUBLIC-VS-PRIVATE.md](./WORK/PUBLIC-VS-PRIVATE.md) — record vs store; UNKNOWN → KNOWN
+7. [WORK/TAMMY001-SO-v002.md](./WORK/TAMMY001-SO-v002.md) — twelve standing orders
 
 ## This repo is a record, not a store
 
 | This public repo holds | This public repo does not hold |
 |---|---|
 | Standing orders | Lot IDs, AIS, buyers, COC |
-| Continuity packet (two planes) | Exact private SHAs / PR receipts |
+| Continuity packet (two planes + 14A ETL) | Exact private SHAs / PR receipts |
 | Repo classification | The live HQ app source tree |
 | Fit plan for HQ code | Harness internals, settlement, margin, price |
 | Waterline rules | Inherited precursor checkmarks |
