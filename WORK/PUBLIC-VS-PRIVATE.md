@@ -14,6 +14,25 @@ Waterline = the disclosure edge.
 Public and private may share a CID. They are not co-authoritative packets.
 A generator does not emit both rails.
 
+## Public state context vs private event logic
+
+Exact repository / ref / SHA stay **UNKNOWN** on this public record.
+
+| Context | Knowledge | Law |
+|---|---|
+| Public state | UNKNOWN | Lawful default. Do not echo a private SHA to make copy look precise. |
+| Private event | UNKNOWN until fetched bytes | Becomes KNOWN only when the Packet Handler binds repository + fully qualified ref + full SHA. VERIFIED-REPORTED is not KNOWN. |
+
+UNKNOWN → KNOWN is a promotion with lineage. It is not a chat claim.
+
+See [CONTINUITY-PACKET-v002.md](./CONTINUITY-PACKET-v002.md).
+
+## Four disclosure rails
+
+PUBLIC · COMPLIANCE · PRIVATE · SHARED_METADATA
+
+Regulators are authorities inside COMPLIANCE. They are not a fifth store.
+
 ## Social is a third thing
 
 Social / personal repos are neither SeaTrace record nor SeaTrace store:
@@ -43,5 +62,6 @@ Measurement is not automatic disclosure.
 
 Builder → verifier → Owner.
 
-This pack is a public **record** of classification and standing orders.
-It is not ratification of v003. It is not a merge stamp.
+This pack is a public **record** of classification, standing orders, and
+the continuity packet. It is not ratification of v003. It is not a merge
+stamp. Git existence is not adoption.
