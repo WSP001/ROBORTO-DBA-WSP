@@ -8,7 +8,8 @@ in directory flow.
 **Posture:** HOLD-PRESERVE-CANDIDATE
 **Orders:** TAMMY001-SO-v002
 **Packet:** SEATRACE:CONTINUITY-PACKET:v002
-**As of:** 2026-08-29
+**As of:** 2026-08-31
+**Doctrine:** PKT005 embedding law PENDING_OWNER — no stores in this folder
 
 This folder is the public **record** rail. It is not a private **store**.
 It is not the live SeaTrace HQ app.
@@ -24,6 +25,8 @@ It is not the live SeaTrace HQ app.
 | [TAMMY001-SO-v002.ts](./TAMMY001-SO-v002.ts) | Same orders as a TypeScript module |
 | [CONTINUITY-PACKET-v002.md](./CONTINUITY-PACKET-v002.md) | Shared Packet Handler packet: two planes, 14A ETL, defects, 001A Level-0 |
 | [14A-DEVOPS-ETL.md](./14A-DEVOPS-ETL.md) | Teammate 14A contract with field duties, graded may-or-may-not-apply |
+| [PKT005-EMBEDDING-DOCTRINE.md](./PKT005-EMBEDDING-DOCTRINE.md) | Embedding & vector-store doctrine v001. Two physical DBs. c.vStore = public map. PENDING_OWNER |
+| [PKT005-AGENT-SKILLS.md](./PKT005-AGENT-SKILLS.md) | Lane specialties for TAMMY / Claude Code / Codex / Antigravity. HOLD for GO |
 | CONTINUITY-PACKET-v002.ts / CONTINUITY-14A.ts | HQ compiler modules. Markdown is the Commons record this pass. |
 
 ## What does not live here
@@ -34,5 +37,6 @@ It is not the live SeaTrace HQ app.
 - Harness internals or review receipts
 - Social / personal repos (CV, SirJames, SirTrav vault, wedding, football, movies, chatbot)
 
-Owner GO is still required for ADOPTED, SEND-IT, and GO-WRITE.
+Owner GO is still required for ADOPTED, SEND-IT, GO-WRITE, GO-EMB-STORES, GO-EMB-WORKER, and EMB-MODEL-001.
 001A is nominated. Not run. Not authorized.
+L3–L5 embedding verification is NOT RUN.
